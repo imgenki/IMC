@@ -7,40 +7,41 @@ public class IMC {
 	private DoubleProperty altura = new SimpleDoubleProperty();
 	private DoubleProperty peso = new SimpleDoubleProperty();
 	private DoubleProperty imc = new SimpleDoubleProperty();
-	
 	public final DoubleProperty alturaProperty() {
-		return altura;
+		return this.altura;
 	}
 	
 	public final double getAltura() {
 		return this.alturaProperty().get();
-		
 	}
 	
-	public final void setAltura(double altura) {
-		this.alturaProperty().set(altura/100);
+	public final void setAltura(final double altura) {
+		this.alturaProperty().set(altura);
 	}
 	
 	public final DoubleProperty pesoProperty() {
-		return peso;
+		return this.peso;
 	}
 	
 	public final double getPeso() {
 		return this.pesoProperty().get();
 	}
 	
-	public final void setPeso(double peso) {
+	public final void setPeso(final double peso) {
 		this.pesoProperty().set(peso);
 	}
 	
 	public final DoubleProperty imcProperty() {
-		return imc;
+		return this.imc;
 	}
 	
-	public final double getIMC() {
+	public final double getImc() {
 		return this.imcProperty().get();
 	}
-	public final void setIMC() {
-		this.imcProperty().set(getPeso()/(Math.pow(getAltura(), 2)));
+	
+	public final void setImc(final double imc) {
+		this.imcProperty().set(imc);
 	}
+	
+	
 }

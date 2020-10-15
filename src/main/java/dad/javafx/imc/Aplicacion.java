@@ -8,6 +8,7 @@ import javafx.scene.control.TextField;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.VBox;
 import javafx.stage.Stage;
+import javafx.util.converter.NumberStringConverter;
 
 public class Aplicacion extends Application {
 	private TextField pesoText, alturaText;
@@ -71,23 +72,18 @@ public class Aplicacion extends Application {
 		primaryStage.setTitle("Calcular IMC");
 		primaryStage.show();
 
-		// listener de peso
-		pesoText.textProperty().addListener(event -> {
-			imc.setPeso(Double.parseDouble(pesoText.textProperty().get()));
-			imc.setIMC();
-		});
+		// bind de peso
+		pesoText.textProperty().bindBidirectional(imc.pesoProperty(), new NumberStringConverter());
 
-		// listener de altura
-		alturaText.textProperty().addListener(event -> {
-			imc.setAltura(Double.parseDouble(alturaText.textProperty().get()));
-			imc.setIMC();
-		});
+		// bind de altura
+		alturaText.textProperty().bindBidirectional(imc.alturaProperty(), new NumberStringConverter());
 
-		// Listener imc
-		imc.imcProperty().addListener(e ->{
-			
-			imcLabel2.textProperty().bind(imc.imcProperty().asString());
-		});
+		//imc
+		
+		imc.imcProperty().bind(imc.pesoProperty().divide((imc.alturaProperty().divide(100)).multiply(imc.alturaProperty().divide(100))));
+		
+		// bind imc
+		imcLabel2.textProperty().bind(imc.imcProperty().asString("%.2f"));
 		
 		//Listener Resultado peso
 		imcLabel2.textProperty().addListener(e -> {
